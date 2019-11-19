@@ -72,7 +72,11 @@ model <- predict(glm.obj, newdata = my_data, type = "response")
 
 # Add the prediction for each value in our current to test the model
 model_predict <- x %>%
-  mutate(prediction = predict(glm.obj, type = "response"))
+  mutate(prediction = predict(glm.obj, type = "response")) %>%
+  group_by(dvote) %>%
+  summarize(avg = mean(prediction))
+
+
 
 ```
 
